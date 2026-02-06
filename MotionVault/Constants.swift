@@ -18,7 +18,7 @@ struct Constants{
     static let trendingTVString = "Trending TV"
     static let topRatedMovieString = "Top Rated Movies"
     static let topRatedTVString = "Top Rated TV"
-
+    
     static let homeIconString = "house"
     static let searchIconString = "magnifyingglass"
     static let upcomingIconString = "play.circle"
@@ -27,7 +27,16 @@ struct Constants{
     static let testTitleURL = "https://image.tmdb.org/t/p/w500/nnl6OWkyPpuMm595hmAxNW3rZFn.jpg"
     static let testTitleURL2 = "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg"
     static let testTitleURL3 = "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+ 
+    static let posterURLStart = "https://image.tmdb.org/t/p/w500"
     
+    static func addPosterPath(to titles: inout[Title]){
+        for index in titles.indices{
+            if let posterPath = titles[index].posterPath{
+                titles[index].posterPath = "\(posterURLStart)\(posterPath)"
+            }
+        }
+    }
 }
 
 extension Text{
