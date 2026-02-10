@@ -54,13 +54,18 @@ struct HomeView: View {
                                 }
                             }
                             
-                            HorizontalListView(header: Constants.trendingMovieString, title: viewModel.trenddingMovies)
-                            HorizontalListView(header: Constants.trendingTVString, title: viewModel.trenddingTV)
-                            HorizontalListView(header: Constants.topRatedMovieString, title: viewModel.topRatedMovies)
-                            HorizontalListView(header: Constants.topRatedTVString, title: viewModel.topRatedTV)
-                        }
-                        .navigationDestination(for: Title.self) { title in
-                            TitleDetailView(title: title)
+                            HorizontalListView(header: Constants.trendingMovieString, title: viewModel.trenddingMovies){ title in
+                                titleDataPath.append(title)
+                            }
+                            HorizontalListView(header: Constants.trendingTVString, title: viewModel.trenddingTV){title in
+                                titleDataPath.append(title)
+                            }
+                            HorizontalListView(header: Constants.topRatedMovieString, title: viewModel.topRatedMovies){title in
+                                titleDataPath.append(title)
+                            }
+                            HorizontalListView(header: Constants.topRatedTVString, title: viewModel.topRatedTV){title in
+                                titleDataPath.append(title)
+                            }
                         }
                     case .failed(let error):
                         Text("Error: \(error.localizedDescription)")
@@ -68,6 +73,9 @@ struct HomeView: View {
                 }
                 .task {
                     await viewModel.getTitles()
+                }
+                .navigationDestination(for: Title.self) { title in
+                    TitleDetailView(title: title)
                 }
             }
         }
