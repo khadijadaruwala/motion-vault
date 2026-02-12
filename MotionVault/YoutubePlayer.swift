@@ -20,7 +20,6 @@ struct YoutubePlayer: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        
         guard
             let baseString = youtubeBaseURL,
             let embedBaseURL = URL(string: baseString)
