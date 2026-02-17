@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct VerticalListView: View {
     var titiles: [Title]
+    let canDelete: Bool
+    @Environment(\.modelContext) var modelContext
     
     var body: some View {
         List(titiles){ title in
@@ -31,10 +34,21 @@ struct VerticalListView: View {
                 }
                 .frame(height: 150)
             }
+            .swipeActions(edge: .trailing) {
+                if canDelete{
+                    Button{
+                        modelContext.delete(title)
+                        try? modelContext.save()
+                    } label: {
+                        Image(systemName: "trash")
+                            .tint(.red)
+                    }
+                }
+            }
         }
     }
 }
 
 #Preview {
-    VerticalListView(titiles: Title.previewTitles)
+    VerticalListView(titiles: Title.previewTitles, canDelete: true)
 }

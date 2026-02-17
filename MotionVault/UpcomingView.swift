@@ -20,7 +20,7 @@ struct UpcomingView: View {
                     ProgressView()
                         .frame(width: geo.size.width, height: geo.size.height)
                 case .success:
-                    VerticalListView(titiles: viewModel.upcomingMovies)
+                    VerticalListView(titiles: viewModel.upcomingMovies, canDelete: false)
                 case .failed(let underlyingError):
                     Text(underlyingError.localizedDescription)
                 }
